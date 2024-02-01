@@ -312,9 +312,9 @@ class PlayerActivityNews : AppCompatActivity(), View.OnClickListener, Player.Eve
                 )
             trackSelector = DefaultTrackSelector(adaptiveTrackSelectionFactory)
             trackSelectionHelper =
-                TrackSelectionHelper(trackSelector, adaptiveTrackSelectionFactory)
+                TrackSelectionHelper(trackSelector!!, adaptiveTrackSelectionFactory)
             lastSeenTrackGroupArray = null
-            eventLogger = EventLogger(trackSelector)
+            eventLogger = EventLogger(trackSelector!!)
             val drmSchemeUuid = if (intent.hasExtra(DRM_SCHEME_UUID_EXTRA)) UUID.fromString(
                 intent.getStringExtra(
                     DRM_SCHEME_UUID_EXTRA

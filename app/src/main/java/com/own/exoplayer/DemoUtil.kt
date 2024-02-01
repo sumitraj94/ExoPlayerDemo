@@ -13,76 +13,91 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.own.exoplayer;
+package com.own.exoplayer
 
-import android.text.TextUtils;
-
-import com.google.android.exoplayer2.Format;
-import com.google.android.exoplayer2.util.MimeTypes;
-
-import java.util.Locale;
+import android.text.TextUtils
+import com.google.android.exoplayer2.Format
+import com.google.android.exoplayer2.util.MimeTypes
+import java.util.Locale
 
 /**
  * Utility methods for demo application.
  */
-/*package*/ final class DemoUtil {
-
-  /**
-   * Builds a track name for display.
-   *
-   * @param format {@link Format} of the track.
-   * @return a generated name specific to the track.
-   */
-  public static String buildTrackName(Format format) {
-    String trackName;
-    if (MimeTypes.isVideo(format.sampleMimeType)) {
-      trackName = joinWithSeparator(joinWithSeparator(joinWithSeparator(
-          buildResolutionString(format), buildBitrateString(format)), buildTrackIdString(format)),
-          buildSampleMimeTypeString(format));
-    } else if (MimeTypes.isAudio(format.sampleMimeType)) {
-      trackName = joinWithSeparator(joinWithSeparator(joinWithSeparator(joinWithSeparator(
-          buildLanguageString(format), buildAudioPropertyString(format)),
-          buildBitrateString(format)), buildTrackIdString(format)),
-          buildSampleMimeTypeString(format));
-    } else {
-      trackName = joinWithSeparator(joinWithSeparator(joinWithSeparator(buildLanguageString(format),
-          buildBitrateString(format)), buildTrackIdString(format)),
-          buildSampleMimeTypeString(format));
+/*package*/
+internal object DemoUtil {
+    /**
+     * Builds a track name for display.
+     *
+     * @param format [Format] of the track.
+     * @return a generated name specific to the track.
+     */
+    fun buildTrackName(format: Format): String {
+        val trackName: String
+        trackName = if (MimeTypes.isVideo(format.sampleMimeType)) {
+            joinWithSeparator(
+                joinWithSeparator(
+                    joinWithSeparator(
+                        buildResolutionString(format), buildBitrateString(format)
+                    ), buildTrackIdString(format)
+                ),
+                buildSampleMimeTypeString(format)
+            )
+        } else if (MimeTypes.isAudio(format.sampleMimeType)) {
+            joinWithSeparator(
+                joinWithSeparator(
+                    joinWithSeparator(
+                        joinWithSeparator(
+                            buildLanguageString(format),
+                            buildAudioPropertyString(format)
+                        ),
+                        buildBitrateString(format)
+                    ), buildTrackIdString(format)
+                ),
+                buildSampleMimeTypeString(format)
+            )
+        } else {
+            joinWithSeparator(
+                joinWithSeparator(
+                    joinWithSeparator(
+                        buildLanguageString(format),
+                        buildBitrateString(format)
+                    ), buildTrackIdString(format)
+                ),
+                buildSampleMimeTypeString(format)
+            )
+        }
+        return if (trackName.length == 0) "unknown" else trackName
     }
-    return trackName.length() == 0 ? "unknown" : trackName;
-  }
 
-  private static String buildResolutionString(Format format) {
-    return format.width == Format.NO_VALUE || format.height == Format.NO_VALUE
-        ? "" : format.width + "x" + format.height;
-  }
+    private fun buildResolutionString(format: Format): String {
+        return if (format.width == Format.NO_VALUE || format.height == Format.NO_VALUE) "" else format.width.toString() + "x" + format.height
+    }
 
-  private static String buildAudioPropertyString(Format format) {
-    return format.channelCount == Format.NO_VALUE || format.sampleRate == Format.NO_VALUE
-        ? "" : format.channelCount + "ch, " + format.sampleRate + "Hz";
-  }
+    private fun buildAudioPropertyString(format: Format): String {
+        return if (format.channelCount == Format.NO_VALUE || format.sampleRate == Format.NO_VALUE) "" else format.channelCount.toString() + "ch, " + format.sampleRate + "Hz"
+    }
 
-  private static String buildLanguageString(Format format) {
-    return TextUtils.isEmpty(format.language) || "und".equals(format.language) ? ""
-        : format.language;
-  }
+    private fun buildLanguageString(format: Format): String {
+        return if (TextUtils.isEmpty(format.language) || "und" == format.language) "" else format.language
+    }
 
-  private static String buildBitrateString(Format format) {
-    return format.bitrate == Format.NO_VALUE ? ""
-        : String.format(Locale.US, "%.2fMbit", format.bitrate / 1000000f);
-  }
+    private fun buildBitrateString(format: Format): String {
+        return if (format.bitrate == Format.NO_VALUE) "" else String.format(
+            Locale.US,
+            "%.2fMbit",
+            format.bitrate / 1000000f
+        )
+    }
 
-  private static String joinWithSeparator(String first, String second) {
-    return first.length() == 0 ? second : (second.length() == 0 ? first : first + ", " + second);
-  }
+    private fun joinWithSeparator(first: String, second: String): String {
+        return if (first.length == 0) second else if (second.length == 0) first else "$first, $second"
+    }
 
-  private static String buildTrackIdString(Format format) {
-    return format.id == null ? "" : ("id:" + format.id);
-  }
+    private fun buildTrackIdString(format: Format): String {
+        return if (format.id == null) "" else "id:" + format.id
+    }
 
-  private static String buildSampleMimeTypeString(Format format) {
-    return format.sampleMimeType == null ? "" : format.sampleMimeType;
-  }
-
-  private DemoUtil() {}
+    private fun buildSampleMimeTypeString(format: Format): String {
+        return if (format.sampleMimeType == null) "" else format.sampleMimeType
+    }
 }
