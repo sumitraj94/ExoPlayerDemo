@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="DemoButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minWidth">40dp</item>
+    </style>
+
+    <style name="MyPopupMenu" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:popupBackground">@color/transparent</item>
+        <item name="android:disabledAlpha">0.5</item>
+    </style>
+
+
+</resources>

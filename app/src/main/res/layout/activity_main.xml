@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/root_new"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"
+        android:background="@color/black"
+
+        android:focusable="true"
+        android:keepScreenOn="true">
+
+        <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+            android:id="@+id/player_view_new"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:focusable="true"
+            app:resize_mode="fill"
+            app:surface_type="surface_view" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp200">
+
+            <TextView
+                android:id="@+id/debug_text_view_new"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:textSize="@dimen/dp10"
+                android:visibility="gone"
+                tools:ignore="SmallSp" />
+
+            <LinearLayout
+                android:id="@+id/controls_root_new"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp40"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/retry_button_new"
+                    style="@style/DemoButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp40"
+                    android:background="@drawable/bg_retry_bg"
+                    android:paddingLeft="@dimen/dp20"
+                    android:paddingRight="@dimen/dp20"
+                    android:text="@string/retry"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp13" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/quality"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:padding="@dimen/dp10"
+            android:src="@drawable/settings"
+
+            android:textColor="@color/white"
+            android:visibility="visible" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
